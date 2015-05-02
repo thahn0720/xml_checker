@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Peeker>
+    <!-- input openstack controller queue info. only qpid is possible -->
+    <Connection host="0.0.0.0"
+        port="5672"
+        type="rabbitmq"
+        username="root"
+        password="root"
+    />
+
+    <!-- ListenenQueue에서 메시지를 받아서 Subscriber의 type에 따라 jms, rabbitmq, qpid라면 queue에 넣어줌 -->
+    <!-- Receiver에 지정된 곳으로부터 peeker 동작에 대한 명령을 받음 -->
+    <!-- subscriber info -->
+    <Subscriber host="165.213.100.60"
+            port="5672"
+            type="rabbitmq"
+            queue="testQueue2"
+            >
+        <!-- receive command to control peeker -->
+        <Receiver host="0.0.0.0"
+            port="61613"
+            type="jms"
+            queue="peeker"
+        />
+
+        <!-- exchange or queue name. if queue, option resend is provided. add comma if to want to listen multiple queue -->
+
+        <!-- qpid -> exchange/queue => amq.topic/# -->
+
+        <!-- rabbitmq -->
+        <!-- exchange, createIfNot, routingKey -> only rabbitmq : createIfNot -->
+        <!-- exchange="nova" : 해당 exchange와 queue를 binding -->
+        <!-- createIfNot="True" : queue가 없다면 만듬 -->
+        <!-- routingKey="*" : exchange에 binding 시 routingKey -->
+        <ListenQueue resend="False">
+            testQueue1
+        </ListenQueue>
+        <!-- '*' in method means to accept all method -->
+        <Method>
+            *
+        </Method>
+        <!-- input ignoring method. this is needed when using '*' in Method tag -->
+        <ExceptMethod>
+            record_metering_data, service_update, compute_node_update
+        </ExceptMethod>
+    </Subscriber>
+</Peeker>

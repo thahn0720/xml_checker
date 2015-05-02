@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vnfd xmlns="urn:ietf:params:xml:ns:yang:nfvo" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="urn:ietf:params:xml:ns:yang:nfvo vnfd-1.xsd ">
+	<vnfd_id>VNFD-VCSCF-001-0001</vnfd_id>
+	<name>VCSCF</name>
+	<!-- The vendor generating this VNFD -->
+	<!-- Version of the VNF descriptor -->
+	<descriptor_version>0.9</descriptor_version>
+	<descriptor_tag>VCSCF-DVT-4</descriptor_tag>
+	<!-- Version of VNF software, described by the descriptor under consideration -->
+	<version>1.0</version>
+	<!-- This describes a set of VNFC elements related to a particular VDU -->
+	<vnfcs>
+		<vnfc>
+		</vnfc>
+	</vnfcs>
+</vnfd>

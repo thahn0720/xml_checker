@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="thahn.java.xmlchecker.editors.EditorForm"
+            extensions="xml"
+            icon="icons/cloud.png"
+            id="thahn.java.descriptorchecker.editors.XMLEditor.form"
+            matchingStrategy="thahn.java.xmlchecker.editors.XmlMatchingStrategy"
+            name="Xml Checker Editor">
+         <contentTypeBinding
+               contentTypeId="thahn.java.descriptorchecker.editor.contenttype.xml">
+         </contentTypeBinding>
+      </editor>
+   </extension>
+	<extension
+        id="thahn.java.descriptorchecker.marker.xmlProblem.grammar"
+        name="Xml Checker XML Format Problem"
+        point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.core.resources.problemmarker" />
+        <super type="org.eclipse.core.resources.textmarker" />
+        <persistent value="true" />
+    </extension>
+    <extension
+        id="thahn.java.descriptorchecker.marker.xmlProblem.dependency"
+        name="Xml Checker Attr Dependency Problem"
+        point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.core.resources.problemmarker" />
+        <super type="org.eclipse.core.resources.textmarker" />
+        <persistent value="true" />
+    </extension>
+    <extension
+        id="thahn.java.descriptorchecker.marker.xmlProblem.tagname"
+        name="Xml Checker Tag Name Problem"
+        point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.core.resources.problemmarker" />
+        <super type="org.eclipse.core.resources.textmarker" />
+        <persistent value="true" />
+    </extension>
+    <extension
+        id="thahn.java.descriptorchecker.marker.xmlProblem.regexp"
+        name="Xml Checker Reg Exp Problem"
+        point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.core.resources.problemmarker" />
+        <super type="org.eclipse.core.resources.textmarker" />
+        <persistent value="true" />
+    </extension>
+	<extension
+       id="thahn.java.descriptorchecker.preference"
+       name="Descriptorchecker Preference"
+       point="org.eclipse.ui.preferencePages">
+        <page
+              class="thahn.java.xmlchecker.preference.XmlCheckerPreferencePage"
+              id="thahn.java.descriptorchecker.preferences.main"
+              name="XML Checker">
+        </page>
+	</extension>
+	<extension point="org.eclipse.ui.startup">
+        <startup class="thahn.java.xmlchecker.welcome.XmlCheckerStartup"/>
+    </extension>
+  	<extension point="org.eclipse.ui.ide.markerResolution">
+      	<markerResolutionGenerator
+         	markerType="thahn.java.descriptorchecker.marker.xmlProblem.tagname"
+         	class="thahn.java.xmlchecker.editors.quick.QuickFixer"/>
+   </extension>
+   <extension
+         point="org.eclipse.ui.contexts">
+      <context
+            description="Xml Checker Editor View"
+            id="thahn.java.descriptorchecker.context"
+            name="Xml Checker Editor View"
+            parentId="org.eclipse.ui.textEditorScope">
+      </context>
+   </extension>
+   <extension
+         point="org.eclipse.ui.bindings">
+      <key
+            commandId="thahn.java.descriptorchecker.command.tooltip.des"
+            contextId="thahn.java.descriptorchecker.context"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+F2">
+      </key>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            category="thahn.java.descriptorchecker.category"
+            id="thahn.java.descriptorchecker.command.tooltip.des"
+            name="Show Tooltip Description">
+      </command>
+      <category
+            id="thahn.java.descriptorchecker.category"
+            name="Descriptor Checker Category">
+      </category>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="thahn.java.xmlchecker.editors.command.TooltipHandler"
+            commandId="thahn.java.descriptorchecker.command.tooltip.des">
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <wizard
+            canFinishEarly="false"
+            category="thahn.java.descriptorchecker.wizards.category"
+            class="thahn.java.xmlchecker.wizards.NewProjectWizard"
+            finalPerspective="org.eclipse.jdt.ui.JavaPerspective"
+            hasPages="true"
+            icon="icons/new_des_project.png"
+            id="thahn.java.descriptorchecker.wizards.newProject"
+            name="Xml Checker Project"
+            preferredPerspectives="org.eclipse.jdt.ui.JavaPerspective"
+            project="true">
+      </wizard>
+      <category
+            id="thahn.java.descriptorchecker.wizards.category"
+            name="Xml Checker Descriptor">
+      </category>
+      <wizard
+            canFinishEarly="false"
+            category="thahn.java.descriptorchecker.wizards.category"
+            class="thahn.java.xmlchecker.wizards.NewDescriptorFileWizard"
+            finalPerspective="org.eclipse.jdt.ui.JavaPerspective"
+            hasPages="true"
+            icon="icons/cloud.png"
+            id="thahn.java.descriptorchecker.wizards.newDescriptor"
+            name="Xml Checker Descriptor XML File"
+            preferredPerspectives="org.eclipse.jdt.ui.JavaPerspective"
+            project="false">
+      </wizard>
+   </extension>
+   <extension
+      id="CmsDescriptorNature"
+      name="CMS Descriptor Nature"
+      point="org.eclipse.core.resources.natures">
+      <runtime>
+         <run
+               class="thahn.java.xmlchecker.nature.CmsDescriptorNature">
+         </run>
+      </runtime>
+   </extension>
+   <extension
+         point="org.eclipse.core.contenttype.contentTypes">
+      <content-type
+            base-type="org.eclipse.core.runtime.xml"
+            describer="thahn.java.xmlchecker.XmlContentDescriber"
+            file-extensions="xml"
+            id="thahn.java.descriptorchecker.editor.contenttype.xml"
+            name="Xml Checker"
+            priority="normal">
+      </content-type>
+   </extension>
+   <extension
+         point="org.eclipse.wst.sse.ui.editorConfiguration">
+      <sourceViewerConfiguration
+            class="thahn.java.xmlchecker.editors.XmlConfiguration"
+            target="thahn.java.xmlchecker.editors.EditorForm">
+      </sourceViewerConfiguration>
+   </extension>
+   <extension
+         id="thahn.java.descriptorchecker.marker.xmlProblem.required"
+         name="CMS Descriptor Required Problem"
+         point="org.eclipse.core.resources.markers">
+      <super
+            type="org.eclipse.core.resources.problemmarker">
+      </super>
+      <super
+            type="org.eclipse.core.resources.textmarker">
+      </super>
+      <persistent
+            value="true">
+      </persistent>
+   </extension>
+</plugin>

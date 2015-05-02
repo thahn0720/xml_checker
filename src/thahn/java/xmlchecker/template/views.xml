@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<root xmlns:android="http://schemas.android.com/apk/res/android"
+	__ignored="true"
+	>
+	<LinearLayout __all_around="true" 
+            android:layout_width="match_parent|wrap_content"
+            android:layout_height="match_parent|wrap_content"
+            android:orientation="horizontal|vertical" 
+            android:background=""
+            >
+	    <TextView __all_around="true" 
+	    		android:id="@@+id/[a-zA-Z0-9_]+"
+	            android:layout_width="match_parent|wrap_content"
+	            android:layout_height="match_parent|wrap_content"
+	            android:background=""
+	            android:text="" 
+	            />
+	    <Button __all_around="true" 
+	    		android:id="@@+id/[a-zA-Z0-9_]+"
+	            android:layout_width="match_parent|wrap_content"
+	            android:layout_height="match_parent|wrap_content"
+	            android:background=""
+	            android:text="" />
+	</LinearLayout>
+</root>
